@@ -63,14 +63,14 @@ This separation improves:
 
 ---
 
-##🧪 Current Limitations
+## 🧪 Current Limitations
 - No authentication or user accounts
 - No database (history is stored in browser local storage)
 - Not deployed yet
 
 ---
 
-##🧩 Planned Enhancements
+## 🧩 Planned Enhancements
 - User authentication with free and paid tiers
 - Advanced mode with secondary AI model
 - Multi-language caption support (including Indian languages)
@@ -80,7 +80,7 @@ This separation improves:
 
 ---
 
-##📜 License
+## 📜 License
 This project is licensed under the GNU AGPLv3 license.
 You are free to view and modify the code for learning purposes, but commercial use requires compliance with the license terms.
 
