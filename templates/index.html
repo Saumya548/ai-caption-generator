@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Caption Generator</title>
+<link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <header>
+        <div class="logo">AI Caption Generator PrototypeI</div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#generator">Generator</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>AI Caption Generator</h1>
+            <p class="tagline">Transform Your Images into Engaging Captions</p>
+            
+            <div class="circle-visual">
+                <div class="circle circle-1"></div>
+                <div class="circle circle-2"></div>
+                <div class="circle circle-3"></div>
+                <div class="circle-center"></div>
+            </div>
+
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollToGenerator()">Get Started</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="generator-section" id="generator">
+        <div class="container">
+            <h2 class="section-title">Generate Your Caption</h2>
+            
+            <!-- Upload Area -->
+            <div class="upload-card">
+                <div class="upload-area" id="uploadArea">
+                    <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="upload-text">Drag & Drop an image or <span class="click-text">click here</span></p>
+                    <input type="file" id="fileInput" accept="image/*" hidden>
+                    
+                    <div class="upload-buttons">
+                        <button class="btn-upload btn-choose" onclick="document.getElementById('fileInput').click()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Choose File
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div class="preview-area" id="previewArea" style="display: none;">
+                    <img id="previewImage" alt="Preview">
+                    <button class="remove-btn" onclick="removeImage()">×</button>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="options-card">
+                <div class="option-group">
+                    <label>Caption Style</label>
+                    <select id="captionStyle" class="select-input">
+                        <option value="creative">Creative</option>
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual</option>
+                        <option value="funny">Funny</option>
+                        <option value="inspirational">Inspirational</option>
+                        <option value="descriptive">Descriptive</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Caption Length</label>
+                    <select id="captionLength" class="select-input">
+                        <option value="short">Short (1-2 lines)</option>
+                        <option value="medium">Medium (3-4 lines)</option>
+                        <option value="long">Long (5+ lines)</option>
+                    </select>
+                </div>
+
+                <div class="option-group">
+                    <label>Include Hashtags</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="includeHashtags" checked>
+                        <label for="includeHashtags" class="toggle-label"></label>
+                    </div>
+                </div>
+
+                <div class="option-group">
+                    <label>Include Emojis</label>
+                    <div class="toggle-switch">
+                        <input type="checkbox" id="includeEmojis" checked>
+                        <label for="includeEmojis" class="toggle-label"></label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Generated Caption -->
+            <div class="caption-card">
+                <div class="caption-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Generated Caption</h3>
+                </div>
+                <div class="caption-content" id="captionContent">
+                    <p class="placeholder-text">No caption yet. Upload an image to get started.</p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-action btn-generate" id="generateBtn" onclick="generateCaption()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Generate Caption
+                    </button>
+                    <button class="btn-action btn-delete" onclick="clearCaption()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="copy-download-buttons">
+                    <button class="btn-secondary-action" onclick="copyCaption()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Copy
+                    </button>
+                    <button class="btn-secondary-action" onclick="downloadCaption()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Download
+                    </button>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="history-section" id="historySection">
+                <div class="history-header">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <circle cx="12" cy="12" r="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="12 6 12 12 16 14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>History</h3>
+                    <button class="btn-clear-history" onclick="clearHistory()">Clear All</button>
+                </div>
+                <div class="history-grid" id="historyGrid">
+                    <p class="no-history">No history yet. Generate your first caption!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Lightning Fast</h3>
+                <p>Generate captivating captions in seconds with our advanced AI algorithms powered by cutting-edge technology.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>Smart & Accurate</h3>
+                <p>Context-aware captions that understand your content and deliver precisely what you need every time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Multiple Styles</h3>
+                <p>Choose from various caption styles - professional, casual, creative, funny, or customize your own unique voice.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Smart Hashtags</h3>
+                <p>Automatically generate relevant hashtags to boost your content's reach and engagement on social media.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">😊</div>
+                <h3>Emoji Integration</h3>
+                <p>Add personality to your captions with contextually relevant emojis that enhance engagement.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Friendly</h3>
+                <p>Works seamlessly on any device - desktop, tablet, or mobile. Generate captions on the go!</p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="about">
+            <h1>About</h1>
+            <p class="feature-card">A Caption Generator Website is an online platform that automatically creates suitable captions for images uploaded by users. It uses artificial intelligence and machine learning models to analyze the content of an image and generate descriptive or creative text that matches it. Such websites help users save time and effort in writing engaging captions for social media posts, marketing materials, or personal galleries. The site typically includes an image upload feature, a caption generation button, and a display section to show the generated result. By combining modern web technologies like HTML, CSS, and JavaScript with AI-based image captioning models, the Caption Generator Website offers an interactive and user-friendly experience that bridges creativity and automation.
+</p>
+        </div>
+    </section>
+
+    <footer>
+        
+        <p>&copy; 2025 Shyamasish - AI Caption Generator. All rights reserved.</p>
+    
+    </footer>
+
+    <script src="../static/main.js"></script>
+</body>
+</html>
