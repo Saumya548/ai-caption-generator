@@ -91,5 +91,3 @@ You are free to view and modify the code for learning purposes, but commercial u
 ## 👥 Contributors
 
 - **Saumya Tagore** – Backend architecture, AI pipeline, Gemini integration, JavaScript interactions  
-- **Shyamasish Bhattacharjee** – Frontend UI/UX design, JavaScript interactions & animations 
-- **Anwesha Khan** – Project Documentation    
