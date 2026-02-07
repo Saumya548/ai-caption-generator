@@ -1,6 +1,8 @@
 # Ai Caption Generator
 An AI-powered web application that generates engaging, context-aware social media captions from images using multimodal large language models.
 
+Built using a two-stage Gemini Vision → text → caption pipeline for improved contextual accuracy.
+
 This project focuses on **accuracy, flexibility, and clean architecture**, making caption generation both fast and customizable.
 
 ⚠️ **Project Status:** Working Prototype (Active Development)
